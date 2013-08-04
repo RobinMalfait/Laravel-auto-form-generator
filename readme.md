@@ -28,7 +28,7 @@ Let's make a form now
 {{ Form::model($user) }}
 	{{ $gen->generate($user) }}
 {{ Form::close() }}
-``
+```
 As a secodn param you can pass an options array for example:
 
 ```php

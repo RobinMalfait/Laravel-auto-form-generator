@@ -8,7 +8,15 @@ class Formgenerator{
 
 	public function generate($model, $options = array())
     {
-        $table      = $model->getTable();
+        $fields = array();
+        if ( ! is_object($model)){
+            $table      = $model;
+            $fields     = $this->getFields($model);
+        } else {
+            $table      = $model->getTable();
+            $fields     = $model->toArray();
+        }
+
         $columns    = \DB::getDoctrineSchemaManager()->listTableDetails($table)->getColumns();
 
     	$this->setSettings($options);
@@ -16,7 +24,8 @@ class Formgenerator{
         /**
          * Loop trought all the fields from the model
          */
-        foreach ($model->toArray() as $fieldName => $value) {
+        foreach ($fields as $fieldName => $value) {
+            $value = (isset($value) AND !empty($value)) ? $value : false;
 
             $extras = $this->getSettings('extras', $fieldName);
 
@@ -113,6 +122,18 @@ class Formgenerator{
         }
 
         return trim(implode(PHP_EOL, $data));
+    }
+
+    protected function getFields($table)
+    {
+        $field_names = array();
+        $columns = \DB::select("SHOW COLUMNS FROM `" . strtolower($table) . "`");
+        foreach ($columns as $c) {
+            $field = $c->Field;
+            $field_names[$field] = $field;
+        }
+
+        return $field_names;
     }
 
     protected function getLabelText($fieldName)

@@ -1,0 +1,20 @@
+{
+    "name": "robin-malfait/formgenerator",
+    "description": "",
+    "authors": [
+        {
+            "name": "Robin Malfait",
+            "email": "malfait.robin@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "illuminate/support": "4.0.x"
+    },
+    "autoload": {
+        "psr-0": {
+            "RobinMalfait\\Formgenerator": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}

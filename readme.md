@@ -22,8 +22,14 @@ Make the $gen variable:
 ```php
 $gen = new RobinMalfait\Formgenerator\Formgenerator;
 ```
-Let's make a form now
+Let's make a form now, you can either pass an object like `$user` OR you can pass `table_name` as a string instead of the $model variable like so:
 
+```php
+{{ Form::open() }}
+	{{ $gen->generate('table_name_here') }}
+{{ Form::close() }}
+```
+With a $model object
 ```php
 {{ Form::model($user) }}
 	{{ $gen->generate($user) }}

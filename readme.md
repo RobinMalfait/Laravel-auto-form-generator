@@ -24,10 +24,11 @@ Make the $gen variable:
 
 Let's make a form now
 
+```php
 	{{ Form::model($user) }}
 		{{ $gen->generate($user) }}
 	{{ Form::close() }}
-
+```
 As a secodn param you can pass an options array for example:
 
 	{{ Form::model($user) }}

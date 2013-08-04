@@ -19,9 +19,9 @@ Add below to the `providers`array in `app/config/app.php` configuration file (ad
 
 ## How to use it
 Make the $gen variable:
-
-	$gen = new RobinMalfait\Formgenerator\Formgenerator;
-
+```php
+$gen = new RobinMalfait\Formgenerator\Formgenerator;
+```
 Let's make a form now
 
 ```php

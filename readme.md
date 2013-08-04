@@ -25,64 +25,66 @@ Make the $gen variable:
 Let's make a form now
 
 ```php
-	{{ Form::model($user) }}
-		{{ $gen->generate($user) }}
-	{{ Form::close() }}
-```
+{{ Form::model($user) }}
+	{{ $gen->generate($user) }}
+{{ Form::close() }}
+``
 As a secodn param you can pass an options array for example:
 
-	{{ Form::model($user) }}
-		{{ $gen->generate($user, array(
+```php
+{{ Form::model($user) }}
+	{{ $gen->generate($user, array(
 
-			// If you want a specific type, put it in here, default is type from the database
-			'types' => array(
-				// Field Name 	=> Type
-				'all_day' 		=> 'checkbox',
+		// If you want a specific type, put it in here, default is type from the database
+		'types' => array(
+			// Field Name 	=> Type
+			'all_day' 		=> 'checkbox',
 
-				// If you want a select field with options
-				'first_name'	=> array(
-					'type'		=> 'select',
-					'options'	=> array(
-						'Taftse' 	=> 'Taftse',
-						'Robin'		=> 'Robin',
-						'Jeffrey'	=> 'Jeffrey'
-					),
+			// If you want a select field with options
+			'first_name'	=> array(
+				'type'		=> 'select',
+				'options'	=> array(
+					'Taftse' 	=> 'Taftse',
+					'Robin'		=> 'Robin',
+					'Jeffrey'	=> 'Jeffrey'
 				),
 			),
+		),
 
-			// Add a class to a field
-			'extras' => array(
-				// Field Name   => array('key' => 'value')
-				'first_name' 	=> array(
-					'class' 	=> 'span5'
-				),
-				'last_name'		=> array(
-					'class' 	=> 'span5'
-				),
-				'activated' 	=> array(
-					'class' => ''
-				),
-
-				// Wildcards, those will be added to every field except for the fields that are listed above
-				'*'				=> array(
-					'class' 	=> 'span5'
-				)
+		// Add a class to a field
+		'extras' => array(
+			// Field Name   => array('key' => 'value')
+			'first_name' 	=> array(
+				'class' 	=> 'span5'
+			),
+			'last_name'		=> array(
+				'class' 	=> 'span5'
+			),
+			'activated' 	=> array(
+				'class' => ''
 			),
 
-			// Submit? Yes or no? Set the text and set a class if you want
-			'submit' => array(
-				'show' 	=> true,
-				'text'  => 'Save',
-				'class' => 'btn btn-success btn-large'
-			),
+			// Wildcards, those will be added to every field except for the fields that are listed above
+			'*'				=> array(
+				'class' 	=> 'span5'
+			)
+		),
 
-			// Fields to not display!
-			'exclude' => array(
-				'event_type', 'id', 'created_at', 'updated_at', 'for_user_id'
-			),
+		// Submit? Yes or no? Set the text and set a class if you want
+		'submit' => array(
+			'show' 	=> true,
+			'text'  => 'Save',
+			'class' => 'btn btn-success btn-large'
+		),
 
-			// Show labels
-			'showLabels' => true,
+		// Fields to not display!
+		'exclude' => array(
+			'event_type', 'id', 'created_at', 'updated_at', 'for_user_id'
+		),
 
-		)) }}
-	{{ Form::close() }}
+		// Show labels
+		'showLabels' => true,
+
+	)) }}
+{{ Form::close() }}
+```

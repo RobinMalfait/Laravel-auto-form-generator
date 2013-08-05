@@ -13,22 +13,18 @@ Add the following to your `composer.json` file:
 
 Then run `composer update` or `composer install` if you have not already installed packages.
 
-Add below to the `providers`array in `app/config/app.php` configuration file (add at the end):
+Add below to the `providers` array in `app/config/app.php` configuration file (add at the end):
 
 	'RobinMalfait\Formgenerator\FormgeneratorServiceProvider'
 
+Add `'Formgenerator' => 'RobinMalfait\Formgenerator\Facades\Formgenerator',` to the `aliases` array also in `app/config/app.php`
+
 ## How to use it
-Make the $gen variable:
-```php
-$gen = new RobinMalfait\Formgenerator\Formgenerator;
-```
-
-
 Let's make a form now, you can either pass an object like `$user` OR you can pass `table_name` as a string instead of the $model variable like so:
 
 ```php
 {{ Form::open() }}
-	{{ $gen->generate('table_name_here') }}
+	{{ Formgenerator::generate('table_name_here') }}
 {{ Form::close() }}
 ```
 
@@ -36,15 +32,14 @@ Let's make a form now, you can either pass an object like `$user` OR you can pas
 With a $model object
 ```php
 {{ Form::model($user) }}
-	{{ $gen->generate($user) }}
+	{{ Formgenerator::generate($user) }}
 {{ Form::close() }}
 ```
-
 
 As a second param you can pass an options array for example:
 ```php
 {{ Form::model($user) }}
-	{{ $gen->generate($user, array(
+	{{ Formgenerator::generate($user, array(
 
 		// If you want a specific type, put it in here, default is type from the database
 		'types' => array(

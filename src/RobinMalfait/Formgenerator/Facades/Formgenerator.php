@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 
-class Camelot extends Facade{
+class Formgenerator extends Facade{
 
 	/**
 	 * Gets the registerd name of the component.

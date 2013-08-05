@@ -199,4 +199,5 @@ class Formgenerator{
             $stngs = $stngs[$arg];
         }
         return $stngs;
-    }}
+    }
+}

@@ -6,7 +6,7 @@ class Formgenerator{
 
     protected $settings;
 
-	public function generate($model, $options = array())
+    public function generate($model, $options = array())
     {
         $fields = array();
         if ( ! is_object($model)){
@@ -19,7 +19,7 @@ class Formgenerator{
 
         $columns    = \DB::getDoctrineSchemaManager()->listTableDetails($table)->getColumns();
 
-    	$this->setSettings($options);
+        $this->setSettings($options);
 
         /**
          * Loop trought all the fields from the model
@@ -161,7 +161,7 @@ class Formgenerator{
      * @param array $options options set by the user in the form itself
      */
     protected function setSettings($options)
-	{
+    {
         $settings = array(
             'exclude'       => array(
                 'id',
@@ -183,12 +183,12 @@ class Formgenerator{
         );
 
         $this->settings = array_merge($settings, $options);
-	}
+    }
 
-	/**
-	 * get the settings
-	 * @return array settings
-	 */
+    /**
+     * get the settings
+     * @return array settings
+     */
     protected function getSettings()
     {
         $stngs = $this->settings;

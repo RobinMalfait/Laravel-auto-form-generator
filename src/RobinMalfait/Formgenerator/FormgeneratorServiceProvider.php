@@ -31,7 +31,7 @@ class FormgeneratorServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array();
+		return array('Formgenerator');
 	}
 
 }

@@ -20,7 +20,7 @@ class FormgeneratorServiceProvider extends ServiceProvider {
 	{
 		$this->app['Formgenerator'] = $this->app->share(function($app)
 		{
-			return new Formgenerator();
+			return new Formgenerator($app['form']);
 		});
 	}
 

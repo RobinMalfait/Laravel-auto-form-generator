@@ -1,10 +1,16 @@
 <?php namespace RobinMalfait\Formgenerator;
 
-use Form;
+use Illuminate\Html\FormBuilder as Form;
 
 class Formgenerator{
 
     protected $settings;
+    protected $form;
+
+    public function __construct(Form $form)
+    {
+        $this->form = $form;
+    }
 
     public function generate($model, $options = array())
     {
@@ -56,7 +62,7 @@ class Formgenerator{
                         if ($this->getSettings('showLabels')) {
                             $data[] = "<label class='checkbox'>";
                         }
-                        $data[] = Form::checkbox($fieldName, null, null, $extras) . $this->getLabelText($fieldName);
+                        $data[] = $this->form->checkbox($fieldName, null, null, $extras) . $this->getLabelText($fieldName);
                         if ($this->getSettings('showLabels')) {
                             $data[] = "</label>";
                         }
@@ -66,7 +72,7 @@ class Formgenerator{
                         if ($this->getSettings('showLabels')) {
                             $data[] = "<label class='radio'>";
                         }
-                        $data[] = Form::radio($fieldName, null, null, $extras) . $this->getLabelText($fieldName);
+                        $data[] = $this->form->radio($fieldName, null, null, $extras) . $this->getLabelText($fieldName);
                         if ($this->getSettings('showLabels')) {
                             $data[] = "</label>";
                         }
@@ -74,39 +80,39 @@ class Formgenerator{
 
                     case 'date':
                         if ($this->getSettings('showLabels')) {
-                            $data[] = Form::label($fieldName, $this->getLabelText($fieldName) . ':');
+                            $data[] = $this->form->label($fieldName, $this->getLabelText($fieldName) . ':');
                         }
-                        $data[] = Form::input('date', $fieldName, date('Y-m-d', strtotime($value)), $extras);
+                        $data[] = $this->form->input('date', $fieldName, date('Y-m-d', strtotime($value)), $extras);
                         break;
 
                     case 'time':
                         if ($this->getSettings('showLabels')) {
-                            $data[] = Form::label($fieldName, $this->getLabelText($fieldName) . ':');
+                            $data[] = $this->form->label($fieldName, $this->getLabelText($fieldName) . ':');
                         }
-                        $data[] = Form::input('time', $fieldName, date('H:i:s', strtotime($value)), $extras);
+                        $data[] = $this->form->input('time', $fieldName, date('H:i:s', strtotime($value)), $extras);
                         break;
 
                     case 'textarea':
                         if ($this->getSettings('showLabels')) {
-                            $data[] = Form::label($fieldName, $this->getLabelText($fieldName) . ':');
+                            $data[] = $this->form->label($fieldName, $this->getLabelText($fieldName) . ':');
                         }
-                        $data[] = Form::textarea($fieldName, null, $extras);
+                        $data[] = $this->form->textarea($fieldName, null, $extras);
                         break;
 
                     case 'select':
                         if ($this->getSettings('showLabels')) {
-                            $data[] = Form::label($fieldName, $this->getLabelText($fieldName) . ':');
+                            $data[] = $this->form->label($fieldName, $this->getLabelText($fieldName) . ':');
                         }
 
-                        $data[] = Form::select($fieldName, $this->getSettings('types', $fieldName, 'options'), null, $extras);
+                        $data[] = $this->form->select($fieldName, $this->getSettings('types', $fieldName, 'options'), null, $extras);
                         break;
 
                     default:
                         if ($this->getSettings('showLabels')) {
-                            $data[] = Form::label($fieldName, $this->getLabelText($fieldName) . ':');
+                            $data[] = $this->form->label($fieldName, $this->getLabelText($fieldName) . ':');
                         }
 
-                        $data[] = Form::input($type, $fieldName, null, $extras);
+                        $data[] = $this->form->input($type, $fieldName, null, $extras);
                         break;
                 }
             }
@@ -117,8 +123,8 @@ class Formgenerator{
          * Check if we need to show the submit button
          */
         if ($this->getSettings('submit', 'show')) {
-            $data[] = Form::label('submit', '&nbsp;'); // get some space above the button
-            $data[] = Form::submit($this->getSettings('submit', 'text'), array('class' => $this->getSettings('submit', 'class')));
+            $data[] = $this->form->label('submit', '&nbsp;'); // get some space above the button
+            $data[] = $this->form->submit($this->getSettings('submit', 'text'), array('class' => $this->getSettings('submit', 'class')));
         }
 
         return trim(implode(PHP_EOL, $data));

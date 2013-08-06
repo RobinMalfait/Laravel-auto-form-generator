@@ -20,7 +20,7 @@ Add below to the `providers` array in `app/config/app.php` configuration file (a
 Add `'Formgenerator' => 'RobinMalfait\Formgenerator\Facades\Formgenerator',` to the `aliases` array also in `app/config/app.php`
 
 ## What's new
-* The ability to add custom labels like in the `extras` array:
+* The ability to add custom labels in the `extras` array:
 
 	```'label' => 'Supercalifragilisticexpialidocious'```
 

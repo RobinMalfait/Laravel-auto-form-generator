@@ -22,7 +22,7 @@ Add `'Formgenerator' => 'RobinMalfait\Formgenerator\Facades\Formgenerator',` to 
 ## What's new
 * The ability to add custom labels like in the `extras` array:
 
-	```php 'label' => 'Supercalifragilisticexpialidocious'```
+	```'label' => 'Supercalifragilisticexpialidocious'```
 
 ## How to use it
 Let's make a form now, you can either pass an object like `$user` OR you can pass `table_name` as a string instead of the $model variable like so:

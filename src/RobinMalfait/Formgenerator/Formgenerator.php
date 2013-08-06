@@ -144,6 +144,10 @@ class Formgenerator{
 
     protected function getLabelText($fieldName)
     {
+        $label = $this->getSettings('extras', $fieldName, 'label');
+        if (isset($label) AND !empty($label)) {
+            return $this->getSettings('extras', $fieldName, 'label');
+        }
         return ucwords(str_replace("_", " ", $fieldName));
     }
 

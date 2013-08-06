@@ -19,6 +19,11 @@ Add below to the `providers` array in `app/config/app.php` configuration file (a
 
 Add `'Formgenerator' => 'RobinMalfait\Formgenerator\Facades\Formgenerator',` to the `aliases` array also in `app/config/app.php`
 
+## What's new
+* The ability to add custom labels like in the `extras` array:
+
+	```php 'label' => 'Supercalifragilisticexpialidocious'```
+
 ## How to use it
 Let's make a form now, you can either pass an object like `$user` OR you can pass `table_name` as a string instead of the $model variable like so:
 
@@ -67,7 +72,10 @@ As a second param you can pass an options array for example:
 				'class' 	=> 'span5'
 			),
 			'activated' 	=> array(
-				'class' => ''
+				'class' => '',
+
+				// Set a custom label if you want
+				'label' => 'Supercalifragilisticexpialidocious'
 			),
 
 			// Wildcards, those will be added to every field except for the fields that are listed above

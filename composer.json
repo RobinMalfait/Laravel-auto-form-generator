@@ -1,6 +1,7 @@
 {
     "name": "robin-malfait/formgenerator",
     "description": "",
+    "keywords": ["laravel", "form", "generator", "auto"],
     "authors": [
         {
             "name": "Robin Malfait",

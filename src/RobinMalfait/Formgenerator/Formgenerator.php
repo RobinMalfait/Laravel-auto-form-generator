@@ -31,6 +31,7 @@ class Formgenerator{
          * Loop trought all the fields from the model
          */
         foreach ($fields as $fieldName => $value) {
+
             $value = (isset($value) AND !empty($value)) ? $value : false;
 
             $extras = $this->getSettings('extras', $fieldName);
@@ -59,6 +60,9 @@ class Formgenerator{
 
                 switch ($type) {
                     case 'checkbox':
+                        if ($this->getContentBefore($fieldName))
+                            $data[] = $this->getContentBefore($fieldName);
+
                         if ($this->getSettings('showLabels')) {
                             $data[] = "<label class='checkbox'>";
                         }
@@ -66,9 +70,16 @@ class Formgenerator{
                         if ($this->getSettings('showLabels')) {
                             $data[] = "</label>";
                         }
+
+                        if ($this->getContentAfter($fieldName))
+                            $data[] = $this->getContentAfter($fieldName);
+
                         break;
 
                     case 'radio':
+                        if ($this->getContentBefore($fieldName))
+                            $data[] = $this->getContentBefore($fieldName);
+
                         if ($this->getSettings('showLabels')) {
                             $data[] = "<label class='radio'>";
                         }
@@ -76,43 +87,82 @@ class Formgenerator{
                         if ($this->getSettings('showLabels')) {
                             $data[] = "</label>";
                         }
+
+                        if ($this->getContentAfter($fieldName))
+                            $data[] = $this->getContentAfter($fieldName);
+
                         break;
 
                     case 'date':
+                        if ($this->getContentBefore($fieldName))
+                            $data[] = $this->getContentBefore($fieldName);
+
                         if ($this->getSettings('showLabels')) {
                             $data[] = $this->form->label($fieldName, $this->getLabelText($fieldName) . ':');
                         }
                         $data[] = $this->form->input('date', $fieldName, date('Y-m-d', strtotime($value)), $extras);
+
+                        if ($this->getContentAfter($fieldName))
+                            $data[] = $this->getContentAfter($fieldName);
+
                         break;
 
                     case 'time':
+                        if ($this->getContentBefore($fieldName))
+                            $data[] = $this->getContentBefore($fieldName);
+
                         if ($this->getSettings('showLabels')) {
                             $data[] = $this->form->label($fieldName, $this->getLabelText($fieldName) . ':');
                         }
                         $data[] = $this->form->input('time', $fieldName, date('H:i:s', strtotime($value)), $extras);
+
+                        if ($this->getContentAfter($fieldName))
+                            $data[] = $this->getContentAfter($fieldName);
+
                         break;
 
                     case 'textarea':
+                        if ($this->getContentBefore($fieldName))
+                            $data[] = $this->getContentBefore($fieldName);
+
                         if ($this->getSettings('showLabels')) {
                             $data[] = $this->form->label($fieldName, $this->getLabelText($fieldName) . ':');
                         }
                         $data[] = $this->form->textarea($fieldName, null, $extras);
+
+                        if ($this->getContentAfter($fieldName))
+                            $data[] = $this->getContentAfter($fieldName);
+
                         break;
 
                     case 'select':
+                        if ($this->getContentBefore($fieldName))
+                            $data[] = $this->getContentBefore($fieldName);
+
                         if ($this->getSettings('showLabels')) {
                             $data[] = $this->form->label($fieldName, $this->getLabelText($fieldName) . ':');
                         }
 
                         $data[] = $this->form->select($fieldName, $this->getSettings('types', $fieldName, 'options'), null, $extras);
+
+                        if ($this->getContentAfter($fieldName))
+                            $data[] = $this->getContentAfter($fieldName);
+
                         break;
 
                     default:
+                        if ($this->getContentBefore($fieldName))
+                            $data[] = $this->getContentBefore($fieldName);
+
                         if ($this->getSettings('showLabels')) {
                             $data[] = $this->form->label($fieldName, $this->getLabelText($fieldName) . ':');
                         }
 
                         $data[] = $this->form->input($type, $fieldName, null, $extras);
+
+                        if ($this->getContentAfter($fieldName))
+                            $data[] = $this->getContentAfter($fieldName);
+
                         break;
                 }
             }
@@ -149,6 +199,22 @@ class Formgenerator{
             return $this->getSettings('extras', $fieldName, 'label');
         }
         return ucwords(str_replace("_", " ", $fieldName));
+    }
+
+    protected function getContentBefore($fieldName)
+    {
+        $content = $this->getSettings('extras', $fieldName, 'content_before');
+        if (isset($content) AND !empty($content)) {
+            return $this->getSettings('extras', $fieldName, 'content_before');
+        }
+    }
+
+    protected function getContentAfter($fieldName)
+    {
+        $content = $this->getSettings('extras', $fieldName, 'content_after');
+        if (isset($content) AND !empty($content)) {
+            return $this->getSettings('extras', $fieldName, 'content_after');
+        }
     }
 
     protected function getInputType($dataType, $name)

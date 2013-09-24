@@ -65,14 +65,17 @@ As a second param you can pass an options array for example:
 		// Add a class to a field
 		'extras' => array(
 			// Field Name   => array('key' => 'value')
-			'first_name' 	=> array(
-				'class' 	=> 'span5'
+			'first_name' 			=> array(
+				'class' 			=> 'span5',
+				'content_before'	=> '<fieldset><legend>My Form</legend>'
 			),
-			'last_name'		=> array(
-				'class' 	=> 'span5'
+			'last_name'				=> array(
+				'class' 			=> 'span5',
+				'content_before'	=> '<br>'
 			),
 			'activated' 	=> array(
-				'class' => '',
+				'class' 		=> '',
+				'content_after'	=> '</fieldset>'
 
 				// Set a custom label if you want
 				'label' => 'Supercalifragilisticexpialidocious'

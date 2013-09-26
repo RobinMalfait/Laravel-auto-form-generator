@@ -59,6 +59,17 @@ class Formgenerator{
                 }
 
                 switch ($type) {
+                    case 'hidden':
+                        if ($this->getContentBefore($fieldName))
+                            $data[] = $this->getContentBefore($fieldName);
+
+                        $data[] = $this->form->input($type, $fieldName, $this->getSettings('types', $fieldName, 'value'), $extras);
+
+                        if ($this->getContentAfter($fieldName))
+                            $data[] = $this->getContentAfter($fieldName);
+
+                        break;
+
                     case 'checkbox':
                         if ($this->getContentBefore($fieldName))
                             $data[] = $this->getContentBefore($fieldName);

@@ -1,6 +1,7 @@
 <?php namespace RobinMalfait\Formgenerator;
 
 use Illuminate\Html\FormBuilder as Form;
+use DB;
 
 class Formgenerator{
 
@@ -23,7 +24,7 @@ class Formgenerator{
             $fields     = $model->toArray();
         }
 
-        $columns    = \DB::getDoctrineSchemaManager()->listTableDetails($table)->getColumns();
+        $columns    = DB::getDoctrineSchemaManager()->listTableDetails($table)->getColumns();
 
         $this->setSettings($options);
 
@@ -197,7 +198,7 @@ class Formgenerator{
     protected function getFields($table)
     {
         $field_names = array();
-        $columns = \DB::select("SHOW COLUMNS FROM `" . strtolower($table) . "`");
+        $columns = DB::select("SHOW COLUMNS FROM `" . strtolower($table) . "`");
         foreach ($columns as $c) {
             $field = $c->Field;
             $field_names[$field] = $field;

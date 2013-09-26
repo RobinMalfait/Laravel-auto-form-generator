@@ -58,6 +58,12 @@ As a second param you can pass an options array for example:
 		'types' => array(
 			// Field Name 	=> Type
 			'all_day' 		=> 'checkbox',
+			
+			// Support for hidden fields (auto-hides associated label) and setting values!
+			'customers_id'			=> array(
+				'type'		=>	'hidden',
+				'value'		=>	2
+			),
 
 			// If you want a select field with options
 			'first_name'	=> array(
@@ -72,11 +78,6 @@ As a second param you can pass an options array for example:
 
 		// Add a class to a field
 		'extras' => array(
-			// Support for hidden fields (auto-hides associated label) and setting values!
-			'customers_id'			=> array(
-				'type'		=>	'hidden',
-				'value'		=>	2
-			),
 			// Field Name   => array('key' => 'value'),
 			'first_name' 			=> array(
 				'class' 			=> 'span5',

@@ -63,7 +63,10 @@ class Formgenerator{
                         if ($this->getContentBefore($fieldName))
                             $data[] = $this->getContentBefore($fieldName);
 
-                        $data[] = $this->form->input($type, $fieldName, $this->getSettings('types', $fieldName, 'value'), $extras);
+                        if ($this->getSettings('types', $fieldName, 'value'))
+                            $data[] = $this->form->input($type, $fieldName, $this->getSettings('types', $fieldName, 'value'), $extras);
+                        else
+                            $data[] = $this->form->input($type, $fieldName, null, $extras);
 
                         if ($this->getContentAfter($fieldName))
                             $data[] = $this->getContentAfter($fieldName);

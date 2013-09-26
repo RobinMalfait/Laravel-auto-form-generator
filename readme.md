@@ -20,6 +20,14 @@ Add below to the `providers` array in `app/config/app.php` configuration file (a
 Add `'Formgenerator' => 'RobinMalfait\Formgenerator\Facades\Formgenerator',` to the `aliases` array also in `app/config/app.php`
 
 ## What's new
+* You may now use hidden fields and set values to those hidden elements. The label associated will be hidden.
+```php
+	'customers_id'	=> array(
+		'type'		=>	'hidden',
+		'value'		=>	2
+	)
+```
+
 * The ability to add custom labels in the `extras` array:
 
 	```'label' => 'Supercalifragilisticexpialidocious'```
@@ -64,15 +72,23 @@ As a second param you can pass an options array for example:
 
 		// Add a class to a field
 		'extras' => array(
-			// Field Name   => array('key' => 'value')
-			'first_name' 	=> array(
-				'class' 	=> 'span5'
+			// Support for hidden fields (auto-hides associated label) and setting values!
+			'customers_id'			=> array(
+				'type'		=>	'hidden',
+				'value'		=>	2
 			),
-			'last_name'		=> array(
-				'class' 	=> 'span5'
+			// Field Name   => array('key' => 'value'),
+			'first_name' 			=> array(
+				'class' 			=> 'span5',
+				'content_before'	=> '<fieldset><legend>My Form</legend>'
+			),
+			'last_name'				=> array(
+				'class' 			=> 'span5',
+				'content_before'	=> '<br>'
 			),
 			'activated' 	=> array(
-				'class' => '',
+				'class' 		=> '',
+				'content_after'	=> '</fieldset>'
 
 				// Set a custom label if you want
 				'label' => 'Supercalifragilisticexpialidocious'

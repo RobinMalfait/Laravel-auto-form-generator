@@ -20,6 +20,13 @@ Add below to the `providers` array in `app/config/app.php` configuration file (a
 Add `'Formgenerator' => 'RobinMalfait\Formgenerator\Facades\Formgenerator',` to the `aliases` array also in `app/config/app.php`
 
 ## What's new
+* You can now flag all fields with 'form-control' for Bootstrap 3 users.
+```php
+	'extras'	=> array(
+		'*'		=> array('class' => 'form-control')
+	)
+```
+
 * You may now use hidden fields and set values to those hidden elements. The label associated will be hidden.
 ```php
 	'customers_id'	=> array(
@@ -95,9 +102,15 @@ As a second param you can pass an options array for example:
 				'label' => 'Supercalifragilisticexpialidocious'
 			),
 
-			// Wildcards, those will be added to every field except for the fields that are listed above
+
+			// Wildcards, those will be added to every field except for the fields that are listed above.
+
+			// If you specify the *form-control* class, all fields will have form-control applied their class list.
+			// This is great for Bootstrap 3 users, but keep in mind, the above functionality will break due to
+			// all fields being given a class.
+
 			'*'				=> array(
-				'class' 	=> 'span5'
+				'class' 	=> 'span5 form-control'
 			)
 		),
 

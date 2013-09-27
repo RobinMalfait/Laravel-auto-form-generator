@@ -29,19 +29,45 @@ class Formgenerator{
         $this->setSettings($options);
 
         /**
-         * Loop trought all the fields from the model
+         * Loop through all the fields from the model
          */
         foreach ($fields as $fieldName => $value) {
 
             $value = (isset($value) AND !empty($value)) ? $value : false;
 
             $extras = $this->getSettings('extras', $fieldName);
+            $wildcards = $this->getSettings('extras', '*');
+
+            // Detect a global Bootstrap 3 class [form-control] on input fields.
+            // Flagging a '*' => ['class' => 'form-control ex1 ex2'] will set all fields
+            // to include these classes, thus over-riding all other "extras" that would
+            // otherwise apply to non-specified fields. This feature is perfect for Bootstrap
+            // 3 users but it breaks down slightly. I'd love to find a better way to implement this.
+
+            // Revisit. 
+            if( isset($wildcards['class']) )
+            {
+                if( preg_match("/(form-control)/", $wildcards['class']) == true )
+                {
+                    if( isset($extras['class']) )
+                    {
+                        if( preg_match("/(form-control)/", $extras['class']) == false )
+                            $extras['class'] .= ' form-control';
+                    }
+                    elseif ( !isset($extras['class']) )
+                    {
+                        $extras['class'] = '';
+                        if ( preg_match("/(form-control)/", $extras['class']) == false )
+                            $extras['class'] = 'form-control';
+                    }
+                }
+            }
 
             /**
              * Check for wildcards: *
              */
             if (empty($extras)) {
-                $extras = $this->getSettings('extras', '*');
+                $extras = $wildcards;
             }
 
             if ( ! in_array($fieldName, $this->getSettings('exclude'))) {

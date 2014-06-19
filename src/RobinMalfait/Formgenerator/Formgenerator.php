@@ -245,16 +245,28 @@ class Formgenerator{
     protected function getContentBefore($fieldName)
     {
         $content = $this->getSettings('extras', $fieldName, 'content_before');
+        $wildcardContent = $this->getSettings('extras', '*', 'content_before');
+
+        if (isset($wildcardContent) AND !empty($wildcardContent)) {
+          $content = (isset($content) AND !empty($content)) ? array_push($content, $wildcardContent) : $wildcardContent;
+        }
+        
         if (isset($content) AND !empty($content)) {
-            return $this->getSettings('extras', $fieldName, 'content_before');
+            return $content;
         }
     }
 
     protected function getContentAfter($fieldName)
     {
         $content = $this->getSettings('extras', $fieldName, 'content_after');
+        $wildcardContent = $this->getSettings('extras', '*', 'content_after');
+
+        if (isset($wildcardContent) AND !empty($wildcardContent)) {
+          $content = (isset($content) AND !empty($content)) ? array_push($wildcardContent, $content) : $wildcardContent;
+        }
+
         if (isset($content) AND !empty($content)) {
-            return $this->getSettings('extras', $fieldName, 'content_after');
+            return $content;
         }
     }
 
